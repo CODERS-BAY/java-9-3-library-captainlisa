@@ -30,14 +30,14 @@ public class Main {
         library.addBook(book7);
 
         //borrow and return books
-        person1.borrowBook(book2);
-        person2.borrowBook(book1);
-        person2.borrowBook(book3);
-        person2.returnBook(book3, 8);
-        person3.borrowBook(book5);
-        person4.borrowBook(book1);
+        library.borrowBook(person2, book1);
+        library.borrowBook(person2, book3);
+        library.borrowBook(person2, book4);
+        System.out.println(person2.getBookList());
+
+        library.borrowBook(person4, book1);
         person4.rechargeCredit(30);
-        person4.borrowBook(book1);
+        library.borrowBook(person4, book1);
 
     }
 }

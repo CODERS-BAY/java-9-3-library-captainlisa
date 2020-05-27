@@ -1,13 +1,14 @@
 package com.codersbay.plakolb;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Person {
 
     private String firstName;
     private String lastName;
     private Integer credits;
-    private ArrayList<Book> bookList = new ArrayList<Book>();
+    private List<Book> bookList = new ArrayList<Book>();
 
     public Person(String firstName, String lastName, Integer credits) {
         this.firstName = firstName;
@@ -28,7 +29,7 @@ public class Person {
 
     public void setCredits(Integer credits) { this.credits = credits; }
 
-    public ArrayList<Book> getBookList() { return bookList; }
+    public List<Book> getBookList() { return bookList; }
 
     //method
     public void rechargeCredit(Integer credit) {
@@ -39,6 +40,9 @@ public class Person {
     public void borrowBook(Book book) {
        if (credits < 5) {
            System.out.println("You do not have enough credits to borrow a book.");
+       } else if (credits == 5) {
+           bookList.add(book);
+           System.out.println("Your credit score is 5. Please recharge your credits soon.");
        } else {
            bookList.add(book);
        }
@@ -46,9 +50,15 @@ public class Person {
 
     public void returnBook(Book book, Integer days) {
         bookList.remove(book);
-        credits -= days;
-        System.out.println("You returned the book successfully.");
-        System.out.printf("Your credit is %d\n", credits);
+        this.credits -= days;
+        if (this.credits < 0) {
+            System.out.println("You returned the book successfully.");
+            System.out.println("Your credit has fallen under zero. Please recharge your credit.");
+        } else {
+            System.out.println("You returned the book successfully.");
+            System.out.printf("Your credit is %d\n", credits);
+        }
+
     }
 
     @Override
